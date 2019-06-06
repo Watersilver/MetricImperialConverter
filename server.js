@@ -13,6 +13,11 @@ var runner            = require('./test-runner');
 var app = express();
 // Don't use while making it because it prevents iframes like glitch's 'show: Next to the code'
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"]
+  }
+}))
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
